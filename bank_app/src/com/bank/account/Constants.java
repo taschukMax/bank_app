@@ -14,4 +14,6 @@ public class Constants {
     public static final String SYSTEM_UNRECOGNIZED_COMMAND = "We couldn't recognize command you entered. Please try again.";
     public static final String SYSTEM_TRANSACTIONS_FILE_NAME = "log.html";
     public static final String ACCOUNT_BALANCE_MESSAGE = "The current balance is: $";
+    public static final String AMOUNT_POSITIVE_MESSAGE = "Amount can not be negative. Please re-enter.";
+    public static final String AMOUNT_INVALID_MESSAGE = "Amount is invalid. Please try again.";
 }

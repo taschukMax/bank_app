@@ -46,7 +46,7 @@ public class BankSystem {
                 sum -= Math.abs(item);
             }
         }
-        System.out.println(Constants.ACCOUNT_BALANCE_MESSAGE + sum);
+        System.out.println(Constants.ACCOUNT_BALANCE_MESSAGE + Math.round(sum));
         return sum;
     }
 
@@ -84,7 +84,7 @@ public class BankSystem {
                 System.out.println(Constants.DEPOSIT_MESSAGE);
                 Scanner reader = new Scanner(System.in);
                 String amount = reader.next();
-                this.setAmount(amount);
+                validateAmount(amount);
                 deposit();
             } else if (operation.equalsIgnoreCase(Constants.SYSTEM_BALANCE)) {
                 balance();
@@ -92,7 +92,7 @@ public class BankSystem {
                 System.out.println(Constants.WITHDRAW_MESSAGE);
                 Scanner reader = new Scanner(System.in);
                 String amount = reader.next();
-                this.setAmount(amount);
+                validateAmount(amount);
                 withdraw();
             } else if (operation.equalsIgnoreCase(Constants.SYSTEM_EXIT)) {
                 exit();
@@ -102,6 +102,26 @@ public class BankSystem {
         } else {
             System.out.println(unrecognizedCommand());
         }
+    }
+
+    /**
+     * Validate user input
+     *
+     * @param amount
+     * @return boolean
+     */
+    private boolean validateAmount(String amount) {
+        try {
+            if (Double.parseDouble(amount) > 0) {
+                this.setAmount(amount);
+                return true;
+            } else {
+                System.out.println(Constants.AMOUNT_POSITIVE_MESSAGE);
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(Constants.AMOUNT_INVALID_MESSAGE);
+        }
+        return false;
     }
 
     /**
@@ -157,7 +177,7 @@ public class BankSystem {
                         tableHeaderEles.append("<tr><td>" + this.getAmount() + "</td></tr>");
                     }
                 }
-                Writer writer = new PrintWriter("log.html", "UTF-8");
+                Writer writer = new PrintWriter(Constants.SYSTEM_TRANSACTIONS_FILE_NAME, "UTF-8");
                 writer.write(doc.html());
                 writer.close();
             }
