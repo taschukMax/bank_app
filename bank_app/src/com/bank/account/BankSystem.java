@@ -84,16 +84,18 @@ public class BankSystem {
                 System.out.println(Constants.DEPOSIT_MESSAGE);
                 Scanner reader = new Scanner(System.in);
                 String amount = reader.next();
-                validateAmount(amount);
-                deposit();
+                if(validateAmount(amount)) {
+                    deposit();
+                }
             } else if (operation.equalsIgnoreCase(Constants.SYSTEM_BALANCE)) {
                 balance();
             } else if (operation.equalsIgnoreCase(Constants.SYSTEM_WITHDRAW)) {
                 System.out.println(Constants.WITHDRAW_MESSAGE);
                 Scanner reader = new Scanner(System.in);
                 String amount = reader.next();
-                validateAmount(amount);
-                withdraw();
+                if (validateAmount(amount)) {
+                    withdraw();
+                }
             } else if (operation.equalsIgnoreCase(Constants.SYSTEM_EXIT)) {
                 exit();
             } else {
